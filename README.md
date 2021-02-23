@@ -8,3 +8,9 @@
 ### Additionally the number of time words like "Gamestop" is used is also considered in calcuation
 
 ### This information will be overlaid with the daily stock price for gamestop
+
+
+
+
+
+Citations: Hutto, C.J. & Gilbert, E.E. (2014). VADER: A Parsimonious Rule-based Model for Sentiment Analysis of Social Media Text. Eighth International Conference on Weblogs and Social Media (ICWSM-14). Ann Arbor, MI, June 2014
