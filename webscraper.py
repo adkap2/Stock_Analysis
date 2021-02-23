@@ -65,19 +65,15 @@ def make_sentiment_vals(db):
         writer = csv.writer(file)
         writer.writerow(["Thread", "Positive", "Negative", "Neutral"])
         for threads in thread_weights_list:
-            count = -1
             for key, value in threads.items():
                 positive , negative = value['positive'], value['negative']
                 neutral = value['neutral']
-                count += 1
-                writer.writerow([key, positive, negative, neutral\
-                    ,instances[count][0], instances[count][1]])
+                writer.writerow([key, positive, negative, neutral])
     with open('stocks.cvs', 'w', newline='') as file:
-        write = csv.write(file)
+        writer = csv.writer(file)
         writer.writerow(["GME", "PLTR"])
         for i in range(len(instances)):
             writer.writerow([instances[i][0], instances[i][1]])
-                
 
 
 # def get_submissions_with_psaw(sub, start):
