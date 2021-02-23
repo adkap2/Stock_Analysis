@@ -1,7 +1,8 @@
 # WallStreetBets_Sentiment
 
 Current collecting comment data for WallStreetBets posts between Jan 1st
-and Feb 22 2021.
+and Feb 22 2021. So far, able to collect a max of 15k comments per post. 
+Posts with above 80k stop the server from scraping entirely. 
 
 Data is then inputted into a sentiment analyzer where postive/negative sentiment levels are provided for each day.
 
