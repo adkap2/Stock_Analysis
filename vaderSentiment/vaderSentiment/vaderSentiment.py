@@ -73,7 +73,8 @@ SENTIMENT_LADEN_IDIOMS = {"cut the mustard": 2, "hand to mouth": -2,
                           "upper hand": 1, "break a leg": 2,
                           "cooking with gas": 2, "in the black": 2, "in the red": -2,
                           "on the ball": 2, "under the weather": -2,
-                          "YOLO": 3, "moon": 3, "tendies": 2}
+                          "yolo": 3, "moon": 3, "tendies": 2, "buy": 4, "sell": -3, "down": -2,
+                          "up": 2}
 
 # check for special case idioms and phrases containing lexicon words
 SPECIAL_CASES = {"the shit": 3, "the bomb": 3, "bad ass": 1.5, "badass": 1.5, "bus stop": 0.0,

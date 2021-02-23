@@ -16,6 +16,8 @@ from vaderSentiment.vaderSentiment.vaderSentiment import *
 from mongo import *
 from dotenv import load_dotenv
 from sentiment_analysis import *
+from psaw import PushshiftAPI
+import csv
 
 
 def get_input_data():
@@ -43,21 +45,22 @@ def main():
     sub = "WallStreetBets"
     stock = "GME"
     start = datetime.datetime(2021,1,1)
-    end = datetime.datetime(2021,2,15)
+    end = datetime.date.today()
     stock = get_stock(stock, start, end)
     stock = clean_data(stock)
     
-    #print(stock)
-    #reddit, subreddit = initiate(sub, env)
+    print(stock)
+    reddit, subreddit = initiate(sub, env)
     db = make_mongo_ses()
-    #test_db(db)
     #posts = get_posts(reddit, subreddit, sub)
     #comments = get_comments(reddit, subreddit, sub, db, posts)
+    # submissions = get_submissions_with_psaw(sub, start)
+    # get_comments_with_psaw(sub, submissions)
+    # print(db.wsb.count())
 
-    print(db.wsb.count())
+    make_sentiment_vals(db)
 
-    print(get_sent(db))
-    print(count_instances(db))
+        
 
 if __name__=="__main__":
 
