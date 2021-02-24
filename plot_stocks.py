@@ -24,6 +24,23 @@ def clean_data(data):
     del data['Volume']
     return data
 
+def plot_full_values(stock, data):
+    data['Date'] = pd.to_datetime(data['Date']).dt.date
+    x = np.arange(0,len(data))
+    fig, ax = plt.subplots()
+    ax.plot(x, data['Mentions'])
+    ax.legend([f"{stock} Mentions"])
+    plt.ylabel('Number of Mentions')
+    plt.xlabel('Date')
+    ax.set_xticklabels(data['Date'])
+    plt.xticks(np.arange(0,len(x), 10), data['Date'][::10])
+    plt.title(f"Mentions for {stock} \n between {data['Date'][0]} and {data['Date'][len(data)-1]}")
+    fig.tight_layout()
+    plt.show()
+    figname = f"figures/{stock}_Mentions"
+    fig.savefig(figname)
+
+
 def plot_data(stock, data):
     data['Date'] = pd.to_datetime(data['Date']).dt.date
     x = np.arange(0,len(data))
@@ -125,6 +142,8 @@ def organize_data(SQL_Query, symbol, start, end):
     result = result.reset_index()
     result = pd.merge(result, df, how = 'outer', left_index=True, right_index=True)
     print(result)
+    result['Mentions'] = result['count']
+    del result['count']
     return result
 
 def main():
@@ -139,6 +158,7 @@ def main():
         plot_data(symbol, result)
         plot_changes(symbol, result)
         plot_high_low_changes(symbol, result)
+        plot_full_values(symbol, result)
         symbol = input("Grab another stock? Or press q to quit: ")
 
 
