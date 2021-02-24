@@ -14,12 +14,12 @@ HA2 = Probility that Gamestop stock value played a significant roll increasing W
 
 ## Statistical Tests
 1.  
-* Null Hypothesis: WallStreetBets did not influence Gamestop stock value
-* Alternate Hypothesis: WallStreetBets did influence GameStop stock value
+    * Null Hypothesis: WallStreetBets did not influence Gamestop stock value
+    * Alternate Hypothesis: WallStreetBets did influence GameStop stock value
 
 2.  
-* Null Hypothsis: No significant correlation between GameStop stock value and WallStreetBets subscriber count
-* Alternative Hypothsis: Gamestop stock value influenced WallStreetBets subscriber count
+    * Null Hypothsis: No significant correlation between GameStop stock value and WallStreetBets subscriber count
+    * Alternative Hypothsis: Gamestop stock value influenced WallStreetBets subscriber count
 
 
 
