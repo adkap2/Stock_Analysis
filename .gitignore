@@ -1,3 +1,4 @@
 .env
 sentiments.csv
 config.py
+requirements.txt
