@@ -44,7 +44,7 @@ def main():
     #sub, stock = get_input_data()
     sub = "WallStreetBets"
     stock = "GME"
-    start = datetime.datetime(2021,1,1)
+    start = datetime.datetime(2020,12,16)
     end = datetime.date.today()
     stock = get_stock(stock, start, end)
     stock = clean_data(stock)
