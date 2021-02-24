@@ -52,7 +52,7 @@ def access_comments():
     make_sentiment_vals(db)
 
 def main():
-    access_comments()
+    # access_comments()
     plot_stocks.main()
 
 if __name__=="__main__":
