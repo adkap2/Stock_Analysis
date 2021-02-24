@@ -22,6 +22,33 @@ HA2 = Probility that Gamestop stock value played a significant roll increasing W
     * Alternative Hypothesis: Gamestop stock value influenced WallStreetBets subscriber count
 
 
+## Plots
+### GME
+<img src="figures/GME_Mentions_Price.png" alt="alt text" width=400 height=300>
+<img src="figures/GME_Mentions_Changes.png" alt="alt text" width=400 height=300>
+<img src="figures/GME_High_Low_Changes_Mentions.png" alt="alt text" width=400 height=300>
+
+### AMC
+<img src="figures/AMC_Mentions_Price.png" alt="alt text" width=400 height=300>
+<img src="figures/AMC_Mentions_Changes.png" alt="alt text" width=400 height=300>
+<img src="figures/AMC_High_Low_Changes_Mentions.png" alt="alt text" width=400 height=300>
+
+### PLTR
+<img src="figures/PLTR_Mentions_Price.png" alt="alt text" width=400 height=300>
+<img src="figures/PLTR_Mentions_Changes.png" alt="alt text" width=400 height=300>
+<img src="figures/PLTR_High_Low_Changes_Mentions.png" alt="alt text" width=400 height=300>
+
+
+### TSLA
+<img src="figures/TSLA_Mentions_Price.png" alt="alt text" width=400 height=300>
+<img src="figures/TSLA_Mentions_Changes.png" alt="alt text" width=400 height=300>
+<img src="figures/TSLA_High_Low_Changes_Mentions.png" alt="alt text" width=400 height=300>
+
+
+### SLV
+<img src="figures/SLV_Mentions_Price.png" alt="alt text" width=400 height=300>
+<img src="figures/SLV_Mentions_Changes.png" alt="alt text" width=400 height=300>
+<img src="figures/SLV_High_Low_Changes_Mentions.png" alt="alt text" width=400 height=300>
 
 
 
