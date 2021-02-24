@@ -58,8 +58,7 @@ order by num_mentions DESC;
 GAMESTOP
 SELECT count(*), dt::date
 from mention
-where stock_id = 11033
-group by dt::date
+group by count
 order by dt DESC;
 
 
