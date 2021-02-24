@@ -47,20 +47,16 @@ CREATE INDEX ON stock_price (stock_id, dt DESC);
 
 SELECT create_hypertable('stock_price', 'dt');
 
-
 SELECT count(*) as num_mentions, stock_id, symbol
 from mention join stock on stock.id = mention.stock_id
 group by stock_id, symbol, mention.dt
 order by num_mentions DESC;
-
-
 
 GAMESTOP
 SELECT count(*), dt::date
 from mention
 group by count
 order by dt DESC;
-
 
 AMC
 SELECT count(*), mention.dt::date
@@ -80,7 +76,6 @@ where mention.stock_id = 10370
 group by mention.dt::date
 order by dt DESC;
 
-
 SELECT count(*), mention.dt::date
 from mention
 LEFT JOIN stock_price
@@ -92,8 +87,6 @@ order by dt DESC;
 select stock_id
 from stock_price
 where stock_id = 11033;
-
-
 
 where stock_price.stock_id = 9136
 group by dt::date;

@@ -8,7 +8,7 @@ import datetime
 from praw.models import MoreComments
 from pandas_datareader import data as pdr
 import yfinance as yf
-from gme import *
+import plot_stocks
 from webscraper import *
 from prawcore.exceptions import Forbidden
 import itertools
@@ -17,14 +17,13 @@ from mongo import *
 from dotenv import load_dotenv
 from sentiment_analysis import *
 from psaw import PushshiftAPI
+import psaw_getter
 import csv
-
 
 def get_input_data():
     sub = input("What Subreddit would you like to look at: ")
     stock = input("What Stock would you like to see: ")
     print(f"Lets take a look at {sub} and {stock} stock ")
-    
     return sub, stock
 
 def load_env_vars():
@@ -35,33 +34,26 @@ def load_env_vars():
     env['password'] = os.getenv("password")
     env['user_agent'] = os.getenv("user_agent")
     env['username'] = os.getenv("username")
-    print(env)
     return env
 
-
-def main():
+def access_comments():
     env = load_env_vars()
-    #sub, stock = get_input_data()
-    sub = "WallStreetBets"
-    stock = "GME"
+    sub, stock = get_input_data()
     start = datetime.datetime(2020,12,16)
     end = datetime.date.today()
-    stock = get_stock(stock, start, end)
-    stock = clean_data(stock)
-    
-    print(stock)
+    stock = plot_stocks.get_stock(stock, start, end)
+    stock = plot_stocks.clean_data(stock)
     reddit, subreddit = initiate(sub, env)
     db = make_mongo_ses()
-    #posts = get_posts(reddit, subreddit, sub)
-    #comments = get_comments(reddit, subreddit, sub, db, posts)
-    # submissions = get_submissions_with_psaw(sub, start)
-    # get_comments_with_psaw(sub, submissions)
-    # print(db.wsb.count())
-
+    posts = get_posts(reddit, subreddit, sub)
+    comments = get_comments(reddit, subreddit, sub, db, posts)
+    submissions = psaw_getter.get_submissions_with_psaw(sub, start)
+    psaw_getter.get_comments_with_psaw(sub, submissions)
     make_sentiment_vals(db)
 
-        
+def main():
+    access_comments()
+    plot_stocks.main()
 
 if __name__=="__main__":
-
     main()
