@@ -29,8 +29,8 @@ HA2 = Probility that Gamestop stock value played a significant roll increasing W
 
 ### Monday's Work
 Current collecting comment data for WallStreetBets posts between Jan 1st
-and Feb 22 2021. So far, able to collect a max of 15k comments per post. 
-Posts with above 80k stop the server from scraping entirely. 
+and Feb 22 2021. So far, able to collect a max of 15k comments per post.
+Posts with above 80k stop the server from scraping entirely.
 
 Data is then inputted into a sentiment analyzer where postive/negative sentiment levels are provided for each day.
 
@@ -40,7 +40,7 @@ This information will be overlaid with the daily stock price for gamestop
 
 ## Technologies Used
 * MongoDB
-* Reddit PRAW API
+* PRAW API
 * PushShift API
 * Docker
 * Postgres
