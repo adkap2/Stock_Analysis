@@ -18,8 +18,8 @@ HA2 = Probility that Gamestop stock value played a significant roll increasing W
     * Alternate Hypothesis: WallStreetBets did influence GameStop stock value
 
 2.  
-    * Null Hypothsis: No significant correlation between GameStop stock value and WallStreetBets subscriber count
-    * Alternative Hypothsis: Gamestop stock value influenced WallStreetBets subscriber count
+    * Null Hypothesis: No significant correlation between GameStop stock value and WallStreetBets subscriber count
+    * Alternative Hypothesis: Gamestop stock value influenced WallStreetBets subscriber count
 
 
 
@@ -37,6 +37,16 @@ Data is then inputted into a sentiment analyzer where postive/negative sentiment
 Additionally the number of time words like "Gamestop" is used is also considered in calcuation
 
 This information will be overlaid with the daily stock price for gamestop
+
+## Technologies Used
+* MongoDB
+* Reddit PRAW API
+* PushShift API
+* Docker
+* Postgres
+* Matplotlib
+* Pandas
+
 
 ### Citations:
 1.  Hutto, C.J. & Gilbert, E.E. (2014). VADER: A Parsimonious Rule-based Model for Sentiment Analysis of Social Media Text. Eighth International Conference on Weblogs and Social Media (ICWSM-14). Ann Arbor, MI, June 2014
