@@ -9,8 +9,18 @@ price for top "Hype" stocks during the given time frame.
 H01 = Probability of no significant correlation between WallStreetBets Posts Gamestop stock value
 HA1 = Probility of significant correlation between WallStreetBets Posts and GameStop stock Value
 
-H02 = Probability of no significant correlation between Gamestock stock value WallStreetBets subscriber count
-HA2 = Probility that Gamestop stock value  Played a significant roll increasing WallStreetBets subscriber count
+H02 = Probability of no significant correlation between Gamestop stock value WallStreetBets subscriber count
+HA2 = Probility that Gamestop stock value played a significant roll increasing WallStreetBets subscriber count
+
+## Statistical Tests
+1. 
+    a.  Null Hypothesis: WallStreetBets did not influence Gamestop stock value
+    b.  Alternate Hypothesis: WallStreetBets did influence GameStop stock value
+2. 
+    a.  Null Hypothsis: No significant correlation between GameStop stock value and WallStreetBets subscriber count
+    b.  Alternative Hypothsis: Gamestop stock value influenced WallStreetBets subscriber count
+
+
 
 
 
