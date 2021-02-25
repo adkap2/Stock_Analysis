@@ -7,6 +7,9 @@ import os
 
 
 def plot_full_values(stock, data):
+    """ plot_full_values(stock, data) -> None
+    Takes in a stock and sataframe and plots number mentions vs stock price
+    """
     data['Date'] = pd.to_datetime(data['Date']).dt.date
     x = np.arange(0,len(data))
     fig, ax = plt.subplots()
@@ -19,13 +22,17 @@ def plot_full_values(stock, data):
     plt.title(f"Mentions for {stock} \n between {data['Date'][0]} and {data['Date'][len(data)-1]}")
     fig.tight_layout()
     plt.show(block=False)
-    plt.pause(1)
+    plt.pause(2)
     plt.close()
     figname = f"figures/{stock}_Mentions"
     fig.savefig(figname)
 
 
 def plot_data(stock, data):
+    """ plot_data(stock, data) -> None
+    Takes in a stock and sataframe and plots number mentions
+    vs stock price Normalized
+    """
     data['Date'] = pd.to_datetime(data['Date']).dt.date
     x = np.arange(0,len(data))
     fig, ax = plt.subplots()
@@ -39,12 +46,16 @@ def plot_data(stock, data):
     plt.title(f"Mentions and Stock price for {stock} normalized\n between {data['Date'][0]} and {data['Date'][len(data)-1]}")
     fig.tight_layout()
     plt.show(block=False)
-    plt.pause(1)
+    plt.pause(2)
     plt.close()
     figname = f"figures/{stock}_Mentions_Price"
     fig.savefig(figname)
 
 def plot_changes(stock, data):
+    """ plot_changes(stock, data) -> None
+    Takes in a stock and dataframe and plots changes (gradient)
+    normalized vs stock price daily change (gradient) normalized
+    """
     data['Date'] = pd.to_datetime(data['Date']).dt.date
     x = np.arange(0,len(data))
     fig, ax = plt.subplots()
@@ -58,12 +69,16 @@ def plot_changes(stock, data):
     plt.title(f"Mentions and Daily Stock Change for {stock} normalized\n between {data['Date'][0]} and {data['Date'][len(data)-1]}")
     fig.tight_layout()
     plt.show(block=False)
-    plt.pause(1)
+    plt.pause(2)
     plt.close()
     figname = f"figures/{stock}_Mentions_Changes"
     fig.savefig(figname)
 
 def plot_high_low_changes(stock, data):
+    """ plot_high_low_changes(stock, data) -> None
+    Takes in a stock and dataframe and plots changes (gradient)
+    normalized vs stock change (daily high, Low) (gradient) normalized
+    """
     data['Date'] = pd.to_datetime(data['Date']).dt.date
     x = np.arange(0,len(data))
     fig, ax = plt.subplots()
@@ -77,7 +92,7 @@ def plot_high_low_changes(stock, data):
     plt.title(f"Mentions and Daily High Low Stock Change for {stock} normalized\n between {data['Date'][0]} and {data['Date'][len(data)-1]}")
     fig.tight_layout()
     plt.show(block=False)
-    plt.pause(1)
+    plt.pause(2)
     plt.close()
     figname = f"figures/{stock}_High_Low_Changes_Mentions"
     fig.savefig(figname)

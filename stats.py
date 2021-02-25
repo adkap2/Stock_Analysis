@@ -1,13 +1,13 @@
 import scipy.stats as stats
 from sklearn.linear_model import LinearRegression
 import matplotlib.pyplot as plt
+import numpy as np
 
-# def one_way_anova(df):
-#     mentions_diff = df['Mentions-Diff-(-1,1)']
-#     change_HL = df['Change-HL-(-1,1)']
-#     Anova_vals = df['Anova_Vals']
 
-#     return stats.f_oneway(mentions_diff, change_HL)
+def one_way_anova(df):
+    df_analysis = df[['Mentions-Diff', 'Change_Norm']].fillna(0)
+    fvalue, pvalue = stats.f_oneway(df_analysis['Mentions-Diff'], df_analysis['Change_Norm'])
+    return fvalue, pvalue
 
 def one_sample_ttest(df):
     return stats.ttest_1samp(df['Anova_Vals'], 0.5)
@@ -35,7 +35,7 @@ def plot_correlation_norm(symbol, df):
 
 def plot_correlation_helper(result):
     result['Mentions-Diff'] = result['Mentions-Diff'].mask(result['Mentions-Diff']\
-        .sub(result['Mentions-Diff'].mean()).div(result['Mentions-Diff'].std()).abs().gt(.75))
+        .sub(result['Mentions-Diff'].mean()).div(result['Mentions-Diff'].std()).abs().gt(.5))
     result['Change_Norm'] = result['Change_Norm'].mask(result['Change_Norm']\
-        .sub(result['Change_Norm'].mean()).div(result['Change_Norm'].std()).abs().gt(.75))
+        .sub(result['Change_Norm'].mean()).div(result['Change_Norm'].std()).abs().gt(.5))
     return result
