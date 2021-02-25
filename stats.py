@@ -18,10 +18,10 @@ def probability_of_res_plot(model):
     normality_plot, stat = stats.probplot(model.resid, plot= plt, rvalue= True)
     ax.set_title("Probability plot of model residual's", fontsize= 20)
     ax.set
-
     plt.show()
 
 def plot_correlation_norm(symbol, df):
+    df = plot_correlation_helper(df)
     fig, ax = plt.subplots()
     ax.scatter(df['Change_Norm'], df['Mentions-Diff'])
     plt.ylabel('Normalized Mentions Difference')
@@ -32,3 +32,10 @@ def plot_correlation_norm(symbol, df):
     plt.close()
     figname = f"figures/{symbol}_Mentions_vs_Day_Change_Norm"
     fig.savefig(figname)
+
+def plot_correlation_helper(result):
+    result['Mentions-Diff'] = result['Mentions-Diff'].mask(result['Mentions-Diff']\
+        .sub(result['Mentions-Diff'].mean()).div(result['Mentions-Diff'].std()).abs().gt(.75))
+    result['Change_Norm'] = result['Change_Norm'].mask(result['Change_Norm']\
+        .sub(result['Change_Norm'].mean()).div(result['Change_Norm'].std()).abs().gt(.75))
+    return result

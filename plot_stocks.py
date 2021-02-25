@@ -13,6 +13,7 @@ from sklearn import preprocessing
 import matplotlib.dates as mdates
 import os
 from plotter import *
+from scipy import stats
 
 def get_stock(symbol, start, end):
     yf.pdr_override()
@@ -79,6 +80,7 @@ def organize_data(SQL_Query, symbol, start, end):
         else:
             x2[i] = (x2[i]/diff)
     result['Anova_Vals'] = (result['Mentions-Diff']*result['Change_Norm']).apply(lambda x: 1 if x > 0 else 0)
+    
     del result['count']
     return result
 
