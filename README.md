@@ -28,18 +28,17 @@ HA2 = Probility that Gamestop stock value played a significant roll increasing W
 <img src="figures/GME_Mentions_Changes.png" alt="alt text" width=400 height=300>
 <img src="figures/GME_High_Low_Changes_Mentions.png" alt="alt text" width=400 height=300>
 <img src="figures/GME_Mentions.png" alt="alt text" width=400 height=300>
+<img src="figures/GME_Mentions_vs_Day_Change_Norm.png" alt="alt text" width=400 height=300>
+
+
 
 ### AMC
 <img src="figures/AMC_Mentions_Price.png" alt="alt text" width=400 height=300>
 <img src="figures/AMC_Mentions_Changes.png" alt="alt text" width=400 height=300>
 <img src="figures/AMC_High_Low_Changes_Mentions.png" alt="alt text" width=400 height=300>
 <img src="figures/AMC_Mentions.png" alt="alt text" width=400 height=300>
+<img src="figures/AMC_Mentions_vs_Day_Change_Norm.png" alt="alt text" width=400 height=300>
 
-### NOK
-<img src="figures/NOK_Mentions_Price.png" alt="alt text" width=400 height=300>
-<img src="figures/NOK_Mentions_Changes.png" alt="alt text" width=400 height=300>
-<img src="figures/NOK_High_Low_Changes_Mentions.png" alt="alt text" width=400 height=300>
-<img src="figures/NOK_Mentions.png" alt="alt text" width=400 height=300>
 
 
 

@@ -55,12 +55,13 @@ def access_comments():
 def main():
     # access_comments()
     dfs = plot_stocks.main()
-    anova_vals = {}
+    one_samples = {}
     for df in dfs:
         print(dfs[df])
         print("\n")
-        anova_vals[df] = one_way_anova(dfs[df])
-    print(anova_vals)
+        one_samples[df] = one_sample_ttest(dfs[df])
+        plot_correlation_norm(df, dfs[df])
+    print(one_samples)
 
 if __name__=="__main__":
     main()

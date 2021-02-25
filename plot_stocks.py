@@ -69,9 +69,16 @@ def organize_data(SQL_Query, symbol, start, end):
     result = pd.merge(result, df, how = 'outer', left_index=True, right_index=True)
     result['Mentions'] = result['count']
     result['Mentions-Diff'] = result['Mentions'].diff(periods=1)
-    result['Mentions-Diff-(-1,1)'] = result['Mentions-Diff'].apply(lambda x: 1 if x >= 0 else - 1)
-    result['Change-HL-(-1,1)'] = result['Change_High_Low_Norm'].apply(lambda x: 1 if x >= 0 else - 1)
-    result['Anova_Vals'] = (result['Mentions-Diff-(-1,1)'] + result['Change-HL-(-1,1)']).apply(lambda x: 0 if x == 0 else 1)
+    x2 = result['Mentions-Diff']
+    max = x2.max()
+    min = x2.min()
+    diff = max - min
+    for i in range(len(x2)):
+        if x2[i] > 0:
+            x2[i] = x2[i]/diff
+        else:
+            x2[i] = (x2[i]/diff)
+    result['Anova_Vals'] = (result['Mentions-Diff']*result['Change_Norm']).apply(lambda x: 1 if x > 0 else 0)
     del result['count']
     return result
 
