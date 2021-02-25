@@ -4,7 +4,18 @@
 
 WallStreetBets users played a role in the value of gamestop stock as other highly shorted
 during January and February of 2021. WallStreetBets subreddit data will be overlayed with daily stock
-price for top "Hype" stocks during the given time frame. 
+price for top "Hype" stocks during the given time frame.
+
+## EDA
+
+I initially scraped reddit comment data using the PRAW API. Since this data had minimal structure, it was stored in a MongoDB.
+Although each post contained around 50k comments, it was difficult to get statisticallysignificant data from these comments as many times
+it would be from a single user/bot spamming. Additionally, on the most interesting posts with 100k+ comments, PRAW API would block me from scraping completely as the request was too large.
+
+I ultimately decided to scrape subreddit posts using the PushShiftAPI. The post titles were more consistent with less concern for user/bot spamming as they were moderated more heavily. Here I scraped The entirety of posts from January 2020 - Present and placed them in a Postgres db. This consisted of 62k rows containing stock_id mentioned, date and post message. I sorted this data by date and stock_id mentioned to get a count of each stock id mentioned per day. I then crosslisted this with scraped stock data in another postgres table. Here I related number of daily mentions of stock to its daily price.
+
+Took get this data into acceptable statistic and plotting format, I then took the daily change of mentions and stock price. Finally I normalized both values to be plotted together.
+
 
 ## Hypothesis Testing
 
