@@ -9,28 +9,28 @@ price for top "Hype" stocks during the given time frame.
 ## EDA
 
 I initially scraped reddit comment data using the PRAW API. Since this data had minimal structure, it was stored in a MongoDB.
-Although each post contained around 50k comments, it was difficult to get statisticallysignificant data from these comments as many times
+Although each post contained around 50k comments, it was difficult to get statistically significant data from these comments as many times
 it would be from a single user/bot spamming. Additionally, on the most interesting posts with 100k+ comments, PRAW API would block me from scraping completely as the request was too large.
 
 I ultimately decided to scrape subreddit posts using the PushShiftAPI. The post titles were more consistent with less concern for user/bot spamming as they were moderated more heavily. Here I scraped The entirety of posts from January 2020 - Present and placed them in a Postgres db. This consisted of 62k rows containing stock_id mentioned, date and post message. I sorted this data by date and stock_id mentioned to get a count of each stock id mentioned per day. I then crosslisted this with scraped stock data in another postgres table. Here I related number of daily mentions of stock to its daily price.
 
-Took get this data into acceptable statistic and plotting format, I then took the daily change of mentions and stock price. Finally I normalized both values to be plotted together.
+To get this data into acceptable statistic and plotting format, I then took the daily change of mentions and stock price. Finally I normalized both values to be plotted together.
 
 
 ## Hypothesis Testing
 
-H01 = Probability of no significant correlation between WallStreetBets Posts Gamestop stock value
-HA1 = Probility of significant correlation between WallStreetBets Posts and GameStop stock Value
+H01 = Probability of no significant correlation between WallStreetBets Posts and GameStop stock value
+HA1 = Probility of statistically significant correlation between WallStreetBets Posts and GameStop stock Value
 
-H02 = Probability of no significant correlation between Gamestop stock value WallStreetBets subscriber count
-HA2 = Probility that Gamestop stock value played a significant roll increasing WallStreetBets subscriber count
+H02 = Probability of no significant correlation between GameStop stock value and WallStreetBets subscriber count
+HA2 = Probility that Gamestop stock value played a statistically significant roll in increasing WallStreetBets' subscriber count
 
 
 ## Statistical Tests
 
 1.  
-    * Null Hypothesis: No correlation between Number of stock mentions and gamestop stock price per day
-    * Alternate Hypothesis: Significant correlation between stock mentions and gamestop stock price per day
+    * Null Hypothesis: No correlation between number of stock mentions and GameStop stock price per day
+    * Alternate Hypothesis: Statistically significant correlation between stock mentions and GameStop stock price per day
 
 2.  
     * Null Hypothesis: No significant correlation between GameStop stock value and WallStreetBets subscriber count
@@ -43,9 +43,9 @@ HA2 = Probility that Gamestop stock value played a significant roll increasing W
 <img src="figures/GME_Mentions_Price.png" alt="alt text" width=400 height=300>
 
 By visual inspection, there is a clear connection between GME's high price and the number of mentions
-in a given day. The filtered dataset includes frequency of GME ticker sybol recorded on a daily basis. For the 50
+in a given day. The filtered dataset includes frequency of GME ticker symbol recorded on a daily basis. For the 50
 days this is plotted over, number of mentions range between 10 to 2800. In this time period, GME intraday high values
-range between $19 and $483.
+range between $19 to $483.
 
 
 <img src="figures/GME_Mentions_Changes.png" alt="alt text" width=400 height=300>
@@ -58,7 +58,7 @@ regardless as to whether the stock value is increasing or decreasing.
 <img src="figures/GME_Mentions_vs_Day_Change_Norm.png" alt="alt text" width=400 height=300>
 
 This scatter plot shows the similarities between change in daily number of mentions and daily stock day change.
-After dropping obvious outlier, it is clear that for every change in daily mentions, an expected similar change will occur in GME
+After dropping obvious outliers, it is clear that for every change in daily mentions, an expected similar change will occur in GME
 stock value.
 
 ### AMC
@@ -70,7 +70,7 @@ identical pattern to that of GME.
 
 ## Results
 
-###  Running the one way anova test with Gradient of Daily Number of Stock Mentions, Daily change in Stock Price
+###  Running The One Way Anova Test with gradient of daily number of stock mentions, daily change in stock price
 1.  **GME**
     *  f value = 1.305
     *  pvalue = 0.257
@@ -81,7 +81,7 @@ identical pattern to that of GME.
 The resulting p values from the Anova test suggest that there is not a significant enough correlation between stock
 price and GME or AMC stock to reject the Null Hypothesis.
 
-###  Running the One Sample Ttest with combined gradient values from Daily Number of Stock Mentions, Daily change in Stock Price
+###  Running the One Sample Ttest with combined gradient values from daily number of stock mentions, daily change in stock price
 1.  **GME**
     *  statistic = -3.999
     *  pvalue = 0.00019
@@ -89,22 +89,9 @@ price and GME or AMC stock to reject the Null Hypothesis.
     *  statistic = -3.195
     *  pvalue = 0.0024
 
-The resulting p values from the one sample Ttest suggest that there is enough statistical signficance to reject the Null Hypothesis that GME price
-and WallStreetBets GME mentions are correlated.
+The resulting p values from the One Sample Ttest suggest that there is enough statistical signficance to reject the Null Hypothesis that GME price
+and mentions on WallStreetBets are correlated.
 
-
-
-
-### Monday's Work
-Current collecting comment data for WallStreetBets posts between Jan 1st
-and Feb 22 2021. So far, able to collect a max of 15k comments per post.
-Posts with above 80k stop the server from scraping entirely.
-
-Data is then inputted into a sentiment analyzer where postive/negative sentiment levels are provided for each day.
-
-Additionally the number of time words like "Gamestop" is used is also considered in calcuation
-
-This information will be overlaid with the daily stock price for gamestop
 
 ## Technologies Used
 * MongoDB
