@@ -29,16 +29,26 @@ HA2 = Probility that Gamestop stock value played a significant roll increasing W
 ## Plots
 
 ### GME
-[<img src="figures/GME_Mentions_Price.png" alt="alt text" width=400 height=300>
+<img src="figures/GME_Mentions_Price.png" alt="alt text" width=400 height=300>
 
 By visual inspection, there is a clear connection between GME's high price and the number of mentions
 in a given day. The filtered dataset includes frequency of GME ticker sybol recorded on a daily basis. For the 50
-days this is plotted over, mention values range between 10 to 2800. In this time period, GME intraday high values
+days this is plotted over, number of mentions range between 10 to 2800. In this time period, GME intraday high values
 range between $19 and $483.
 
 
 <img src="figures/GME_Mentions_Changes.png" alt="alt text" width=400 height=300>
+
+This plot shows the daily number of mentions plotted against the daily change in stock price.
+Here, it is seen that on the days when the stock made the largest leaps, whether postive or negative, redditors were
+posting the most about the stock. This plot would suggest that people discuss the stock most on days with significant change. This is 
+regardless as to whether the stock value is increasing or decreasing.
+
 <img src="figures/GME_Mentions_vs_Day_Change_Norm.png" alt="alt text" width=400 height=300>
+
+This scatter plot shows the similarities between change in daily number of mentions and daily stock day change.
+After dropping obvious outlier, it is clear that for every change in daily mentions, an expected similar change will occur in GME
+stock value.
 
 
 
