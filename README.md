@@ -2,9 +2,7 @@
 
 ## Proposition
 
-WallStreetBets users played a role in the value of gamestop stock as other highly shorted
-during January and February of 2021. WallStreetBets subreddit data will be overlayed with daily stock
-price for top "Hype" stocks during the given time frame.
+WallStreetBets users played a significnat role in the daily price value of GameStop stock during early 2021. WallStreetBets subreddit data will be compared with daily stock price data for 2021. Other "Hype" stocks will be included as well for reference.
 
 ## EDA
 
