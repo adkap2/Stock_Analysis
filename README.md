@@ -50,6 +50,11 @@ This scatter plot shows the similarities between change in daily number of menti
 After dropping obvious outlier, it is clear that for every change in daily mentions, an expected similar change will occur in GME
 stock value.
 
+### AMC
+<img src="figures/AMC_Mentions_Price.png" alt="alt text" width=400 height=300>
+
+AMC stock was known to have followed a similar trend to GME stock in early 2021. The mentions and stock price follow a near
+identical pattern to that of GME.
 
 
 ## Results
