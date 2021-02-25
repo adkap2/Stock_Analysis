@@ -1,21 +1,25 @@
 # Analysis of Gamestop Stock in the WallStreetBets Subreddit
 
 ## Proposition
+----------------------------------------------------------------------------------------------------------------
 WallStreetBets users played a role in the value of gamestop stock as other highly shorted
 during January and February of 2021. WallStreetBets subreddit data will be overlayed with daily stock
 price for top "Hype" stocks during the given time frame. 
 
 ## Hypothesis Testing
+----------------------------------------------------------------------------------------------------------------
 H01 = Probability of no significant correlation between WallStreetBets Posts Gamestop stock value
 HA1 = Probility of significant correlation between WallStreetBets Posts and GameStop stock Value
 
 H02 = Probability of no significant correlation between Gamestop stock value WallStreetBets subscriber count
 HA2 = Probility that Gamestop stock value played a significant roll increasing WallStreetBets subscriber count
 
+
 ## Statistical Tests
+----------------------------------------------------------------------------------------------------------------
 1.  
-    * Null Hypothesis: WallStreetBets did not influence Gamestop stock value
-    * Alternate Hypothesis: WallStreetBets did influence GameStop stock value
+    * Null Hypothesis: No correlation between Number of stock mentions and gamestop stock price per day
+    * Alternate Hypothesis: Significant correlation between stock mentions and gamestop stock price per day
 
 2.  
     * Null Hypothesis: No significant correlation between GameStop stock value and WallStreetBets subscriber count
@@ -23,21 +27,38 @@ HA2 = Probility that Gamestop stock value played a significant roll increasing W
 
 
 ## Plots
+----------------------------------------------------------------------------------------------------------------
 ### GME
 <img src="figures/GME_Mentions_Price.png" alt="alt text" width=400 height=300>
 <img src="figures/GME_Mentions_Changes.png" alt="alt text" width=400 height=300>
-<img src="figures/GME_High_Low_Changes_Mentions.png" alt="alt text" width=400 height=300>
-<img src="figures/GME_Mentions.png" alt="alt text" width=400 height=300>
 <img src="figures/GME_Mentions_vs_Day_Change_Norm.png" alt="alt text" width=400 height=300>
 
 
 
-### AMC
-<img src="figures/AMC_Mentions_Price.png" alt="alt text" width=400 height=300>
-<img src="figures/AMC_Mentions_Changes.png" alt="alt text" width=400 height=300>
-<img src="figures/AMC_High_Low_Changes_Mentions.png" alt="alt text" width=400 height=300>
-<img src="figures/AMC_Mentions.png" alt="alt text" width=400 height=300>
-<img src="figures/AMC_Mentions_vs_Day_Change_Norm.png" alt="alt text" width=400 height=300>
+## Results
+----------------------------------------------------------------------------------------------------------------
+
+###  Running the one way anova test with Gradient of Daily Number of Stock Mentions, Daily change in Stock Price
+1.  **GME**
+    *  f value = 1.305
+    *  pvalue = 0.257
+2.  **AMC**
+    *  f value = 1.816
+    *  pvalue = 0.181
+
+The resulting p values from the Anova test suggest that there is not a significant enough correlation between stock
+price and GME or AMC stock to reject the Null Hypothesis.
+
+###  Running the One Sample Ttest with combined gradient values from Daily Number of Stock Mentions, Daily change in Stock Price
+1.  **GME**
+    *  statistic = -3.999
+    *  pvalue = 0.00019
+2.  **AMC**
+    *  statistic = -3.195
+    *  pvalue = 0.0024
+
+The resulting p values from the one sample Ttest suggest that there is enough statistical signficance to reject the Null Hypothesis that GME price
+and WallStreetBets GME mentions are correlated.
 
 
 

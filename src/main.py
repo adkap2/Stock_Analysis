@@ -20,6 +20,7 @@ from psaw import PushshiftAPI
 import psaw_getter
 import csv
 from stats import *
+sys.path.append('../WallStreetBets_Sentiment')
 
 def get_input_data():
     """Return the subreddit and stock from user
@@ -72,14 +73,14 @@ def main():
     for df in dfs:
         print(dfs[df])
         print("\n")
-        print((df, one_way_anova(dfs[df])))
+        print((df, one_way_anova(dfs[df])), file=open('data/stats_output.txt', "a"))
         print("\n")
         one_samples[df] = one_sample_ttest(dfs[df])
         plot_correlation_norm(df, dfs[df])
         print("\n")
         
     for sample in one_samples:
-        print((sample, one_samples[sample]))
+        print((sample, one_samples[sample]), file=open('data/stats_output.txt', "a"))
     
 
 if __name__=="__main__":
