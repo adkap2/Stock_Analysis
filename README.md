@@ -2,15 +2,15 @@
 
 ## Proposition
 
-WallStreetBets users played a significnat role in the daily price value of GameStop stock during early 2021. WallStreetBets subreddit data will be compared with daily stock price data for 2021. Other "Hype" stocks will be included as well for reference.
+[WallStreetBets](https://www.reddit.com/r/wallstreetbets/) users played a significant role in the daily price value of [GameStop](https://finance.yahoo.com/quote/GME/) stock during early 2021. WallStreetBets subreddit data will be compared with daily stock price data for 2021. Other "Hype" stocks will be included as well for reference.
 
 ## EDA
 
-I initially scraped reddit comment data using the PRAW API. Since this data had minimal structure, it was stored in a MongoDB.
+I initially scraped reddit comment data using the [PRAW API](https://praw.readthedocs.io/en/latest/). Since this data had minimal structure, it was stored in a MongoDB.
 Although each post contained around 50k comments, it was difficult to get statistically significant data from these comments as many times
 it would be from a single user/bot spamming. Additionally, on the most interesting posts with 100k+ comments, PRAW API would block me from scraping completely as the request was too large.
 
-I ultimately decided to scrape subreddit posts using the PushShiftAPI. The post titles were more consistent with less concern for user/bot spamming as they were moderated more heavily. Here I scraped The entirety of posts from January 2020 - Present and placed them in a Postgres db. This consisted of 62k rows containing stock_id mentioned, date and post message. I sorted this data by date and stock_id mentioned to get a count of each stock id mentioned per day. I then crosslisted this with scraped stock data in another postgres table. Here I related number of daily mentions of stock to its daily price.
+I ultimately decided to scrape subreddit posts using the [PushShiftAPI](https://pushshift.io). The post titles were more consistent with less concern for user/bot spamming as they were moderated more heavily. Here I scraped The entirety of posts from January 2020 - Present and placed them in a Postgres db. This consisted of 62k rows containing stock_id mentioned, date and post message. I sorted this data by date and stock_id mentioned to get a count of each stock id mentioned per day. I then crosslisted this with scraped stock data in another postgres table. Here I related number of daily mentions of stock to its daily price.
 
 To get this data into acceptable statistic and plotting format, I then took the daily change of mentions and stock price. Finally I normalized both values to be plotted together.
 
