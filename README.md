@@ -1,13 +1,13 @@
 # Analysis of Gamestop Stock in the WallStreetBets Subreddit
 
 ## Proposition
-----------------------------------------------------------------------------------------------------------------
+
 WallStreetBets users played a role in the value of gamestop stock as other highly shorted
 during January and February of 2021. WallStreetBets subreddit data will be overlayed with daily stock
 price for top "Hype" stocks during the given time frame. 
 
 ## Hypothesis Testing
-----------------------------------------------------------------------------------------------------------------
+
 H01 = Probability of no significant correlation between WallStreetBets Posts Gamestop stock value
 HA1 = Probility of significant correlation between WallStreetBets Posts and GameStop stock Value
 
@@ -16,7 +16,7 @@ HA2 = Probility that Gamestop stock value played a significant roll increasing W
 
 
 ## Statistical Tests
-----------------------------------------------------------------------------------------------------------------
+
 1.  
     * Null Hypothesis: No correlation between Number of stock mentions and gamestop stock price per day
     * Alternate Hypothesis: Significant correlation between stock mentions and gamestop stock price per day
@@ -27,16 +27,22 @@ HA2 = Probility that Gamestop stock value played a significant roll increasing W
 
 
 ## Plots
-----------------------------------------------------------------------------------------------------------------
+
 ### GME
-<img src="figures/GME_Mentions_Price.png" alt="alt text" width=400 height=300>
+[<img src="figures/GME_Mentions_Price.png" alt="alt text" width=400 height=300>
+
+By visual inspection, there is a clear connection between GME's high price and the number of mentions
+in a given day. The filtered dataset includes frequency of GME ticker sybol recorded on a daily basis. For the 50
+days this is plotted over, mention values range between 10 to 2800. In this time period, GME intraday high values
+range between $19 and $483.
+
+
 <img src="figures/GME_Mentions_Changes.png" alt="alt text" width=400 height=300>
 <img src="figures/GME_Mentions_vs_Day_Change_Norm.png" alt="alt text" width=400 height=300>
 
 
 
 ## Results
-----------------------------------------------------------------------------------------------------------------
 
 ###  Running the one way anova test with Gradient of Daily Number of Stock Mentions, Daily change in Stock Price
 1.  **GME**
