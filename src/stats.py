@@ -2,6 +2,8 @@ import scipy.stats as stats
 from sklearn.linear_model import LinearRegression
 import matplotlib.pyplot as plt
 import numpy as np
+import sys
+sys.path.append('../WallStreetBets_Sentiment')
 
 def one_way_anova(df):
     """ one_way_anove(df) -> fvalue (float) pvalue(float)
@@ -45,7 +47,7 @@ def plot_correlation_norm(symbol, df):
     plt.show(block=False)
     plt.pause(10)
     plt.close()
-    figname = f"../figures/{symbol}_Mentions_vs_Day_Change_Norm"
+    figname = f"figures/{symbol}_Mentions_vs_Day_Change_Norm"
     fig.savefig(figname)
 
 def plot_correlation_helper(result):

@@ -4,6 +4,8 @@ import datetime
 import numpy as np
 import matplotlib.dates as mdates
 import os
+import sys
+sys.path.append('../WallStreetBets_Sentiment')
 
 
 def plot_full_values(stock, data):
@@ -24,7 +26,7 @@ def plot_full_values(stock, data):
     plt.show(block=False)
     plt.pause(2)
     plt.close()
-    figname = f"../figures/{stock}_Mentions"
+    figname = f"figures/{stock}_Mentions"
     fig.savefig(figname)
 
 
@@ -38,7 +40,7 @@ def plot_data(stock, data):
     fig, ax = plt.subplots()
     ax.plot(x,data['High_Norm'])
     ax.plot(x, data['Mentions_Norm'])
-    ax.legend([F"{stock} Daily High Price", f"{stock} Mentions"])
+    ax.legend([f"{stock} Daily High Price", f"{stock} Mentions"])
     plt.ylabel('Normalized Value')
     plt.xlabel('Date')
     ax.set_xticklabels(data['Date'])
@@ -48,7 +50,7 @@ def plot_data(stock, data):
     plt.show(block=False)
     plt.pause(2)
     plt.close()
-    figname = f"../figures/{stock}_Mentions_Price"
+    figname = f"figures/{stock}_Mentions_Price"
     fig.savefig(figname)
 
 def plot_changes(stock, data):
@@ -71,7 +73,7 @@ def plot_changes(stock, data):
     plt.show(block=False)
     plt.pause(2)
     plt.close()
-    figname = f"../figures/{stock}_Mentions_Changes"
+    figname = f"figures/{stock}_Mentions_Changes"
     fig.savefig(figname)
 
 def plot_high_low_changes(stock, data):
@@ -94,5 +96,5 @@ def plot_high_low_changes(stock, data):
     plt.show(block=False)
     plt.pause(2)
     plt.close()
-    figname = f"../figures/{stock}_High_Low_Changes_Mentions"
+    figname = f"figures/{stock}_High_Low_Changes_Mentions"
     fig.savefig(figname)
