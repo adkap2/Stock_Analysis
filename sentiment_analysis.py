@@ -2,6 +2,11 @@ from main import *
 from vaderSentiment.vaderSentiment.vaderSentiment import *
 
 def get_sent(db):
+    """ get_sent(db) -> thread_weights (Dictionary containing each comment
+    and the positive/negative weight associated with it)
+    takes compounded weight from sentence and if its >= 0.05 considers positive
+    and if < -0.05 then negative.
+    """
     wsb = db.wsb
     threads = wsb.find({})
     analyzer = SentimentIntensityAnalyzer()
@@ -29,6 +34,10 @@ def get_sent(db):
     return thread_weights
 
 def count_instances(db):
+    """count_instances(db) -> counts (List)
+    takes in the data base and counts instances of certain words mentioned
+    like GME or gamestop then adds it to a list to be plotted
+    """
     wsb = db.wsb
     threads = wsb.find({})
     counts = []
