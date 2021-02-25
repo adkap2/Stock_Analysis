@@ -83,13 +83,16 @@ def main():
         start_time = start = datetime.datetime(2021,1,1)
         end = datetime.date.today()
         queries = make_sql_queries()
-        SQL_Query = pd.read_sql_query(queries[symbol], connection)
-        result = organize_data(SQL_Query, symbol, start_time, end)
-        plot_data(symbol, result)
-        plot_changes(symbol, result)
-        plot_high_low_changes(symbol, result)
-        plot_full_values(symbol, result)
-        dataframes[symbol] = result
+        if symbol not in queries:
+            print("Stock not in Database: Try Again")
+        else:
+            SQL_Query = pd.read_sql_query(queries[symbol], connection)
+            result = organize_data(SQL_Query, symbol, start_time, end)
+            plot_data(symbol, result)
+            plot_changes(symbol, result)
+            plot_high_low_changes(symbol, result)
+            plot_full_values(symbol, result)
+            dataframes[symbol] = result
         symbol = input("Grab another stock? Or press q to quit: ")
     return dataframes
 
