@@ -19,6 +19,7 @@ from sentiment_analysis import *
 from psaw import PushshiftAPI
 import psaw_getter
 import csv
+from stats import *
 
 def get_input_data():
     sub = input("What Subreddit would you like to look at: ")
@@ -53,7 +54,13 @@ def access_comments():
 
 def main():
     # access_comments()
-    plot_stocks.main()
+    dfs = plot_stocks.main()
+    anova_vals = {}
+    for df in dfs:
+        print(dfs[df])
+        print("\n")
+        anova_vals[df] = one_way_anova(dfs[df])
+    print(anova_vals)
 
 if __name__=="__main__":
     main()

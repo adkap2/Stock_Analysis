@@ -12,6 +12,7 @@ import psycopg2.extras
 from sklearn import preprocessing
 import matplotlib.dates as mdates
 import os
+from plotter import *
 
 def get_stock(symbol, start, end):
     yf.pdr_override()
@@ -24,77 +25,6 @@ def clean_data(data):
     del data['Volume']
     return data
 
-def plot_full_values(stock, data):
-    data['Date'] = pd.to_datetime(data['Date']).dt.date
-    x = np.arange(0,len(data))
-    fig, ax = plt.subplots()
-    ax.plot(x, data['Mentions'])
-    ax.legend([f"{stock} Mentions"])
-    plt.ylabel('Number of Mentions')
-    plt.xlabel('Date')
-    ax.set_xticklabels(data['Date'])
-    plt.xticks(np.arange(0,len(x), 10), data['Date'][::10])
-    plt.title(f"Mentions for {stock} \n between {data['Date'][0]} and {data['Date'][len(data)-1]}")
-    fig.tight_layout()
-    plt.show()
-    figname = f"figures/{stock}_Mentions"
-    fig.savefig(figname)
-
-
-def plot_data(stock, data):
-    data['Date'] = pd.to_datetime(data['Date']).dt.date
-    x = np.arange(0,len(data))
-    fig, ax = plt.subplots()
-    ax.plot(x,data['High_Norm'])
-    ax.plot(x, data['Mentions_Norm'])
-    ax.legend([F"{stock} Daily High Price", f"{stock} Mentions"])
-    plt.ylabel('Normalized Value')
-    plt.xlabel('Date')
-    ax.set_xticklabels(data['Date'])
-    #lt.xticks(np.arange(0,len(x), 20))
-    plt.xticks(np.arange(0,len(x), 10), data['Date'][::10])
-    plt.title(f"Mentions and Stock price for {stock} normalized\n between {data['Date'][0]} and {data['Date'][len(data)-1]}")
-    fig.tight_layout()
-    plt.show()
-    figname = f"figures/{stock}_Mentions_Price"
-    fig.savefig(figname)
-
-def plot_changes(stock, data):
-    data['Date'] = pd.to_datetime(data['Date']).dt.date
-    x = np.arange(0,len(data))
-    fig, ax = plt.subplots()
-    ax.plot(x,data['Change_Norm'])
-    ax.plot(x, data['Mentions_Norm'])
-    ax.legend([F"{stock} Daily Change", f"{stock} Mentions"])
-    plt.ylabel('Normalized Value')
-    plt.xlabel('Date')
-    ax.set_xticklabels(data['Date'])
-    #lt.xticks(np.arange(0,len(x), 20))
-    plt.xticks(np.arange(0,len(x), 10), data['Date'][::10])
-    plt.title(f"Mentions and Daily Stock Change for {stock} normalized\n between {data['Date'][0]} and {data['Date'][len(data)-1]}")
-    fig.tight_layout()
-    plt.show()
-    figname = f"figures/{stock}_Mentions_Changes"
-    fig.savefig(figname)
-
-def plot_high_low_changes(stock, data):
-    data['Date'] = pd.to_datetime(data['Date']).dt.date
-    x = np.arange(0,len(data))
-    fig, ax = plt.subplots()
-    ax.plot(x,data['Change_High_Low_Norm'])
-    ax.plot(x, data['Mentions_Norm'])
-    ax.legend([F"{stock} Daily High, Low Change", f"{stock} Mentions"])
-    plt.ylabel('Normalized Value')
-    plt.xlabel('Date')
-    ax.set_xticklabels(data['Date'])
-    #lt.xticks(np.arange(0,len(x), 20))
-    plt.xticks(np.arange(0,len(x), 10), data['Date'][::10])
-    plt.title(f"Mentions and Daily High Low Stock Change for {stock} normalized\n between {data['Date'][0]} and {data['Date'][len(data)-1]}")
-    fig.tight_layout()
-    plt.show()
-    figname = f"figures/{stock}_High_Low_Changes_Mentions"
-    fig.savefig(figname)
-
 def organize_data(SQL_Query, symbol, start, end):
     df = get_stock(symbol, start, end)
     df = clean_data(df)
@@ -103,10 +33,11 @@ def organize_data(SQL_Query, symbol, start, end):
     del df1['dt']
     df1 = df1.set_index('Date')
     result = pd.merge(df, df1, how = 'outer', left_index=True, right_index=True)
+    result['Open-Close-Change'] = result['Close'] - result['Open']
+    result['H-L-Change'] = result['High'] - result['Low']
     result['Change_Norm'] = result['Close'] - result['Open']
     result['Change_High_Low_Norm'] = result['High'] - result['Low']
     x = result[['count', 'Open', 'High']] #returns a numpy array
-
     x1 = result['Change_Norm']
     max = x1.max()
     min = x1.min()
@@ -116,8 +47,6 @@ def organize_data(SQL_Query, symbol, start, end):
             x1[i] = x1[i]/diff
         else:
             x1[i] = (x1[i]/diff)
-    print(x1)
-
     x2 = result['Change_High_Low_Norm']
     max = x2.max()
     min = x2.min()
@@ -127,27 +56,28 @@ def organize_data(SQL_Query, symbol, start, end):
             x2[i] = x2[i]/diff
         else:
             x2[i] = (x2[i]/diff)
-    print(x2)
-
     min_max_scaler = preprocessing.MinMaxScaler()
     x_scaled = min_max_scaler.fit_transform(x)
     df = pd.DataFrame(x_scaled)
     df['Mentions_Norm'] = df[0]
     df['Open_Norm'] = df[1]
     df['High_Norm'] = df[2]
-    #df['Change_Norm'] = df[3]
     del df[0]
     del df[1]
     del df[2]
     result = result.reset_index()
     result = pd.merge(result, df, how = 'outer', left_index=True, right_index=True)
-    print(result)
     result['Mentions'] = result['count']
+    result['Mentions-Diff'] = result['Mentions'].diff(periods=1)
+    result['Mentions-Diff-(-1,1)'] = result['Mentions-Diff'].apply(lambda x: 1 if x >= 0 else - 1)
+    result['Change-HL-(-1,1)'] = result['Change_High_Low_Norm'].apply(lambda x: 1 if x >= 0 else - 1)
+    result['Anova_Vals'] = (result['Mentions-Diff-(-1,1)'] + result['Change-HL-(-1,1)']).apply(lambda x: 0 if x == 0 else 1)
     del result['count']
     return result
 
 def main():
     symbol = input("What Stock would you like to see (Symbol): ")
+    dataframes = {}
     while symbol != 'q':
         connection = psycopg2.connect(host=config.DB_HOST, database=config.DB_NAME, user=config.DB_USER, password=config.DB_PASS)
         start_time = start = datetime.datetime(2021,1,1)
@@ -159,8 +89,9 @@ def main():
         plot_changes(symbol, result)
         plot_high_low_changes(symbol, result)
         plot_full_values(symbol, result)
+        dataframes[symbol] = result
         symbol = input("Grab another stock? Or press q to quit: ")
-
+    return dataframes
 
 def make_sql_queries():
     dic = {}
