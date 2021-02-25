@@ -21,6 +21,7 @@ import psaw_getter
 import csv
 from stats import *
 sys.path.append('../WallStreetBets_Sentiment')
+import search_wsb
 
 def get_input_data():
     """Return the subreddit and stock from user
@@ -63,25 +64,29 @@ def access_comments():
     psaw_getter.get_comments_with_psaw(sub, submissions)
     make_sentiment_vals(db)
 
-def main():
+def main(argv = None):
     """ Main function which based on user input will either scrape comments or
     call plot stocks which takes takes submissions and plots count number of each
     stock ticker used over time. This is overlaid with stock price data."""
-    # access_comments()
-    dfs = plot_stocks.main()
-    one_samples = {}
-    for df in dfs:
-        print(dfs[df])
-        print("\n")
-        print((df, one_way_anova(dfs[df])), file=open('data/stats_output.txt', "a"))
-        print("\n")
-        one_samples[df] = one_sample_ttest(dfs[df])
-        plot_correlation_norm(df, dfs[df])
-        print("\n")
-        
-    for sample in one_samples:
-        print((sample, one_samples[sample]), file=open('data/stats_output.txt', "a"))
-    
+    print(sys.argv)
+    if len(sys.argv) > 1:
+        if sys.argv[1] == '0':
+            access_comments()
+        if sys.argv[1] == '1':
+            search_wsb.main()
+    else:
+        dfs = plot_stocks.main()
+        one_samples = {}
+        for df in dfs:
+            print(dfs[df])
+            print("\n")
+            print((df, one_way_anova(dfs[df])), file=open('data/stats_output.txt', "a"))
+            print("\n")
+            one_samples[df] = one_sample_ttest(dfs[df])
+            plot_correlation_norm(df, dfs[df])
+            print("\n")
+        for sample in one_samples:
+            print((sample, one_samples[sample]), file=open('data/stats_output.txt', "a"))
 
 if __name__=="__main__":
     main()

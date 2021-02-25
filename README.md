@@ -14,6 +14,22 @@ I ultimately decided to scrape subreddit posts using the [PushShiftAPI](https://
 
 To get this data into acceptable statistic and plotting format, I then took the daily change of mentions and stock price. Finally I normalized both values to be plotted together.
 
+## Running the code
+1.  Initialization 
+   - Call python3 "src/main.py" to run the code from the repository. If running in webscraping mode, add a 0 or 1 to the program call ex: "python3 src/main.py 1". 
+   - To scrape data, user must provide reddit developer key and userid, password in config.py file
+   - To scrape for comments, use argument '0'
+   - To scrape for mentions in posts, use argument '1'
+   - If no argument is supplied, the program will analyze data from the existing database.
+   - Use [this](https://hub.docker.com/layers/timescale/timescaledb/2.0.1-pg12-oss/images/sha256-ebe0f554255251bc6c1e164fbeb71a9edf99f1267222740e3d504215cb7f76a2?context=explore) docker image to create a postgres server.
+   - Once the database is running, call main in '1' mode to initiate the database with psycopg2
+   - For comment scraping mode, ensure [this](https://hub.docker.com/_/mongo) container is running on your computer
+   - Once the database is running, call main in '0' mode to initiate pymongo with database
+
+2.  User mode
+   - The program will request user to input a stock to analyze in symbol form
+   - The program will plot insights on stock
+   - The program will request user to either input another stock symbol or type 'q' to quit
 
 ## Hypothesis Testing
 
@@ -104,4 +120,5 @@ and mentions on WallStreetBets are correlated.
 ### Citations:
 1.  Hutto, C.J. & Gilbert, E.E. (2014). VADER: A Parsimonious Rule-based Model for Sentiment Analysis of Social Media Text. Eighth International Conference on Weblogs and Social Media (ICWSM-14). Ann Arbor, MI, June 2014
 2.  “Yahoo Finance - Stock Market Live, Quotes, Business &amp; Finance News.” Yahoo! Finance, Yahoo!, finance.yahoo.com/.
-3.  “Subreddit Stats.” Subreddit Stats - Statistics for Every Subreddit, subredditstats.com/r/wallstreetbets. 
+3.  “Subreddit Stats.” Subreddit Stats - Statistics for Every Subreddit, subredditstats.com/r/wallstreetbets.
+4.  “Hackingthemarkets - Overview.” GitHub, github.com/hackingthemarkets. 
