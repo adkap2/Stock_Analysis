@@ -63,28 +63,38 @@ def organize_data(SQL_Query, symbol, start, end):
     df1['Date'] = df1['dt']
     del df1['dt']
     df1 = df1.set_index('Date')
+    # Sets index to date for cross reference capability
     result = pd.merge(df, df1, how='outer', left_index=True, right_index=True)
+    # Creating new Gradient and normalized columns to be plotted
     result['Open-Close-Change'] = result['Close'] - result['Open']
     result['H-L-Change'] = result['High'] - result['Low']
     result['Change_Norm'] = result['Close'] - result['Open']
     result['Change_High_Low_Norm'] = result['High'] - result['Low']
     x = result[['count', 'Open', 'High']]  # returns a numpy array
+    # Passes new columns into normalizer function
     normalizer(result['Change_Norm'])
     normalizer(result['Change_High_Low_Norm'])
+    # Scales the columns
     min_max_scaler = preprocessing.MinMaxScaler()
     x_scaled = min_max_scaler.fit_transform(x)
     df = pd.DataFrame(x_scaled)
     df['Mentions_Norm'] = df[0]
     df['Open_Norm'] = df[1]
     df['High_Norm'] = df[2]
+    # Prepares normalized columns to be merged with dataframe
     df = df.drop([0, 1, 2], axis=1)
     result = result.reset_index()
+    # Merge stock and mentions dataframe
     result = pd.merge(result, df, how=
         'outer', left_index=True, right_index=True)
     result['Mentions'] = result['count']
+    # Drop unnecessary columns
     result = result.drop(['count'], axis=1)
     result['Mentions-Diff'] = result['Mentions'].diff(periods=1)
+    # Normalizes mentions gradient
     normalizer(result['Mentions-Diff'])
+    # Makes anove test column with values based on mentions and
+    # stock change which take values of 0 or 1
     result['Anova_Vals'] = (result['Mentions-Diff']*result['Change_Norm'])\
         .apply(lambda x: 1 if x > 0 else 0)
     return result
@@ -97,20 +107,30 @@ def main():
     handles error checking for invalid user input.
     returns the dataframe to overall program main file
     """
+    # Get stock symbol
     symbol = input("What Stock would you like to see (Symbol): ")
+    # Create dictionaries to store stock symbol and dataframe
     one_samples = {}
     dataframes = {}
+    # Loop through user input for each stock to be analyzed
     while symbol != 'q':
+        # Make a conecction with postgres
         connection = psycopg2.connect(host=config.DB_HOST, database=
             config.DB_NAME, user=config.DB_USER, password=config.DB_PASS)
+        # Start time is configurable based on which dates shall be plotted
+        # IE for TSLA would focus on mid 2020 while GME is early 2021
         start_time = datetime.datetime(2021, 1, 1)
         end = datetime.date.today()
+        # Grab queries from function below
         queries = make_sql_queries()
+        # Error handling
         if symbol not in queries:
             print("Stock not in Database: Try Again")
         else:
             SQL_Query = pd.read_sql_query(queries[symbol], connection)
+            # Calls organize function which does most of the work
             result = organize_data(SQL_Query, symbol, start_time, end)
+            # Plotters
             plot_data(symbol, result)
             plot_changes(symbol, result)
             plot_high_low_changes(symbol, result)

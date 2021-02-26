@@ -61,7 +61,7 @@ Here, it is seen that on the days when the stock made the largest leaps, whether
 posting the most about the stock. This plot would suggest that people discuss the stock most on days with significant change. This is 
 regardless as to whether the stock value is increasing or decreasing.
 
-<img src="figures/GME_Mentions_vs_Day_Change_Norm_copy.png" alt="alt text" width=400 height=300>
+<img src="figures/GME_Mentions_vs_Day_Change_Norm.png" alt="alt text" width=400 height=300>
 
 This scatter plot shows the similarities between change in daily number of mentions and daily stock day change.
 After dropping obvious outliers, it is clear that for every change in daily mentions, an expected similar change will occur in GME

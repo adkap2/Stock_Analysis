@@ -8,6 +8,7 @@ import sys
 sys.path.append('../WallStreetBets_Sentiment')
 
 
+# Plan to put all of these in single function
 def plot_full_values(stock, data):
     """ plot_full_values(stock, data) -> None
     Takes in a stock and sataframe and plots number mentions vs stock price
@@ -26,6 +27,7 @@ def plot_full_values(stock, data):
     plt.show(block=False)
     plt.pause(2)
     plt.close()
+    # Save figure to file
     figname = f"figures/{stock}_Mentions"
     fig.savefig(figname)
 
@@ -50,6 +52,7 @@ def plot_data(stock, data):
     plt.show(block=False)
     plt.pause(2)
     plt.close()
+    # Save figure to file
     figname = f"figures/{stock}_Mentions_Price"
     fig.savefig(figname)
 
@@ -73,6 +76,7 @@ def plot_changes(stock, data):
     plt.show(block=False)
     plt.pause(2)
     plt.close()
+    # Save figure to file
     figname = f"figures/{stock}_Mentions_Changes"
     fig.savefig(figname)
 
@@ -96,5 +100,6 @@ def plot_high_low_changes(stock, data):
     plt.show(block=False)
     plt.pause(2)
     plt.close()
+    # Save figure to file
     figname = f"figures/{stock}_High_Low_Changes_Mentions"
     fig.savefig(figname)

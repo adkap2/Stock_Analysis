@@ -11,11 +11,13 @@ def initiate(subreddit, env):
     supplied in the .env file locally. This is also initiallize the specific subreddit
     to look at (WallStreetBets)
     """
+    # Initializes reddit client 
     reddit = praw.Reddit(client_id=env['client_id'],
                      client_secret=env['client_secret'],
                      password=env['password'],
                      user_agent=env['user_agent'],
                      username=env['username'])
+    # Pulls subreddit 
     subreddit = reddit.subreddit(subreddit)
     return reddit, subreddit
 
@@ -23,6 +25,7 @@ def get_posts(reddit, subreddit, sub):
     """ get_posts(reddit, subreddit, sub) reddit (Obj), subreddit(Obj), sub(str)
     returns a dictionary of posts from subreddit based on flair category"""
     posts = {}
+    # Extracts posts from subreddit
     for submission in reddit.subreddit(sub).search('flair:"Daily Discussion"',sort= 'new', limit=100):
         posts[submission.title] = submission.url
     return posts
@@ -35,12 +38,14 @@ def get_comments(reddit, subreddit, sub, db, posts):
     wsb = db['wsb']
     post_dic_comments = {}
     count = 0
+    # Iterates through each post to scrape all comments
     for post in posts:
         count += 1
         print(f"Current post scraping is {post}")
         post_dic_comments[post] = []
         submission = reddit.submission(url=posts[post])
         submission.comments.replace_more(limit=150) #Switch to None for everything
+        # Iterates through Submissions 
         for comment in submission.comments.list():
             post_dic_comments[post].append((comment.body, comment.score))
         wsb.insert_one({'sub': sub, 'thread': post, 'comments': post_dic_comments[post]})
@@ -62,11 +67,13 @@ def make_sentiment_vals(db):
         writer = csv.writer(file)
         writer.writerow(["Thread", "Positive", "Negative", "Neutral"])
         for threads in thread_weights_list:
+            # Gets thread sentiment weights for each comment, then writes it to file
             for key, value in threads.items():
                 positive , negative = value['positive'], value['negative']
                 neutral = value['neutral']
                 writer.writerow([key, positive, negative, neutral])
     with open('../data/stocks.cvs', 'w', newline='') as file:
+        # Writes count of mentions of stock per day for each stock
         writer = csv.writer(file)
         writer.writerow(["GME", "PLTR"])
         for i in range(len(instances)):
