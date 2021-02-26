@@ -20,8 +20,9 @@ from psaw import PushshiftAPI
 import psaw_getter
 import csv
 from stats import *
-sys.path.append('../WallStreetBets_Sentiment')
 import search_wsb
+sys.path.append('../WallStreetBets_Sentiment')
+
 
 def get_input_data():
     """Return the subreddit and stock from user
@@ -30,6 +31,7 @@ def get_input_data():
     stock = input("What Stock would you like to see: ")
     print(f"Lets take a look at {sub} and {stock} stock ")
     return sub, stock
+
 
 def load_env_vars():
     """Loads environment variables from .env file
@@ -43,6 +45,7 @@ def load_env_vars():
     env['username'] = os.getenv("username")
     return env
 
+
 def access_comments():
     """ This is the main function when in access comment mode
     loads env vars, gets input stock data, sets start and end time,
@@ -52,7 +55,7 @@ def access_comments():
     comment."""
     env = load_env_vars()
     sub, stock = get_input_data()
-    start = datetime.datetime(2020,12,16)
+    start = datetime.datetime(2020, 12, 16)
     end = datetime.date.today()
     stock = plot_stocks.get_stock(stock, start, end)
     stock = plot_stocks.clean_data(stock)
@@ -64,10 +67,12 @@ def access_comments():
     psaw_getter.get_comments_with_psaw(sub, submissions)
     make_sentiment_vals(db)
 
-def main(argv = None):
-    """ Main function which based on user input will either scrape comments or
-    call plot stocks which takes takes submissions and plots count number of each
-    stock ticker used over time. This is overlaid with stock price data."""
+
+def main(argv=None):
+    """ Main function which based on user input will either scrape
+    comments or call plot stocks which takes takes submissions and
+    plots count number of eachstock ticker used over time.
+    This is overlaid with stock price data."""
     print(sys.argv)
     if len(sys.argv) > 1:
         if sys.argv[1] == '0':
@@ -79,23 +84,30 @@ def main(argv = None):
         one_samples = {}
         print("\n\n")
         for df in dfs:
-            print((df, one_way_anova(dfs[df])), file=open('data/stats_output.txt', "a"))
+            print((df, one_way_anova(dfs[df])), file=open('data/\
+                stats_output.txt', "a"))
             print(f"The One Way Anova test for {df} yielded a statistic\
-value of {one_way_anova(dfs[df])[0]} and a pvalue of {one_way_anova(dfs[df])[1]}")
+value of {one_way_anova(dfs[df])[0]} and a pvalue of \
+{one_way_anova(dfs[df])[1]}")
             one_samples[df] = one_sample_ttest(dfs[df])
             print(f"The one sample ttest for {df} yielded a statistic\
 value of {one_samples[df][0]} and a pvalue of {one_samples[df][1]}")
             if one_samples[df][1] < 0.05 and one_way_anova(dfs[df])[1] < 0.05:
-                print(f"Since both tests yielded a pvalue below our 0.05 threshold, we can confidently reject\
- our null hypothesis that there is no statistically significant correlation between \
-{df} mentions and {df} stock price")
+                print(f"Since both tests yielded a pvalue below our 0.05 \
+threshold, we can confidently reject\
+ our null hypothesis that there is no statistically\
+ significant correlation between {df} mentions and {df} stock price")
                 print("\n\n")
             else:
-                print(f"The p value is above our necessary 0.05 threshold to reject our null hyptothesis\
- that the stock price of {df} has no correlation with number of {df} mentions.")
+                print(f"The p value is above our necessary 0.05 \
+ threshold to reject our null hyptothesis\
+ that the stock price of {df} has no\
+  correlation with number of {df} mentions.")
             print("\n\n")
         for sample in one_samples:
-            print((sample, one_samples[sample]), file=open('data/stats_output.txt', "a"))
+            print((sample, one_samples[sample]), file=open('data/st\
+            ats_output.txt', "a"))
 
-if __name__=="__main__":
+
+if __name__ == "__main__":
     main()

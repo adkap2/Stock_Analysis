@@ -15,6 +15,7 @@ import os
 from plotter import *
 from scipy import stats
 
+
 def get_stock(symbol, start, end):
     """ get_stock(symbol, start, end) -> Dataframe
     Takes a given stock symbol and a date range,
@@ -25,6 +26,7 @@ def get_stock(symbol, start, end):
     df = pd.DataFrame(data)
     return df
 
+
 def clean_data(data):
     """ clean_data(data) -> data
     drops unecessary columns from stock data
@@ -32,6 +34,7 @@ def clean_data(data):
     del data['Adj Close']
     del data['Volume']
     return data
+
 
 def normalizer(df):
     """ normalizer(df) -> df
@@ -45,9 +48,10 @@ def normalizer(df):
             df[i] = df[i]/diff
     return df
 
+
 def organize_data(SQL_Query, symbol, start, end):
     """ organize_data(SQL_Query, symbol, start, end) -> dataframe
-    takes in a sql query and a stock symbol to be analyzed. 
+    takes in a sql query and a stock symbol to be analyzed.
     Then builds data frame from sql data base including stock price and number
     of times that stock is mentioned in posts for a given day.
     Then organizes the data into usable format by making gradient column
@@ -59,12 +63,12 @@ def organize_data(SQL_Query, symbol, start, end):
     df1['Date'] = df1['dt']
     del df1['dt']
     df1 = df1.set_index('Date')
-    result = pd.merge(df, df1, how = 'outer', left_index=True, right_index=True)
+    result = pd.merge(df, df1, how='outer', left_index=True, right_index=True)
     result['Open-Close-Change'] = result['Close'] - result['Open']
     result['H-L-Change'] = result['High'] - result['Low']
     result['Change_Norm'] = result['Close'] - result['Open']
     result['Change_High_Low_Norm'] = result['High'] - result['Low']
-    x = result[['count', 'Open', 'High']] #returns a numpy array
+    x = result[['count', 'Open', 'High']]  # returns a numpy array
     normalizer(result['Change_Norm'])
     normalizer(result['Change_High_Low_Norm'])
     min_max_scaler = preprocessing.MinMaxScaler()
@@ -75,13 +79,16 @@ def organize_data(SQL_Query, symbol, start, end):
     df['High_Norm'] = df[2]
     df = df.drop([0, 1, 2], axis=1)
     result = result.reset_index()
-    result = pd.merge(result, df, how = 'outer', left_index=True, right_index=True)
+    result = pd.merge(result, df, how=
+        'outer', left_index=True, right_index=True)
     result['Mentions'] = result['count']
     result = result.drop(['count'], axis=1)
     result['Mentions-Diff'] = result['Mentions'].diff(periods=1)
     normalizer(result['Mentions-Diff'])
-    result['Anova_Vals'] = (result['Mentions-Diff']*result['Change_Norm']).apply(lambda x: 1 if x > 0 else 0)
+    result['Anova_Vals'] = (result['Mentions-Diff']*result['Change_Norm'])\
+        .apply(lambda x: 1 if x > 0 else 0)
     return result
+
 
 def main():
     """main() -> dataframes
@@ -94,8 +101,9 @@ def main():
     one_samples = {}
     dataframes = {}
     while symbol != 'q':
-        connection = psycopg2.connect(host=config.DB_HOST, database=config.DB_NAME, user=config.DB_USER, password=config.DB_PASS)
-        start_time = start = datetime.datetime(2021,1,1)
+        connection = psycopg2.connect(host=config.DB_HOST, database=
+            config.DB_NAME, user=config.DB_USER, password=config.DB_PASS)
+        start_time = datetime.datetime(2021, 1, 1)
         end = datetime.date.today()
         queries = make_sql_queries()
         if symbol not in queries:
@@ -111,6 +119,7 @@ def main():
             dataframes[symbol] = result
         symbol = input("Grab another stock? Or press q to quit: ")
     return dataframes
+
 
 def make_sql_queries():
     """ make_sql_queries() -> dic (Dictionary)
@@ -201,8 +210,10 @@ def make_sql_queries():
 
     return dic
 
-if __name__=="__main__":
+
+if __name__ == "__main__":
     main()
+
 
 # def get_stock_symbols(stock):
 #     url="https://pkgstore.datahub.io/core/nasdaq-listings/nasdaq-listed_csv/data/7665719fb51081ba0bd834fde71ce822/nasdaq-listed_csv.csv"
