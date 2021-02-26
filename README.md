@@ -35,11 +35,8 @@ To get this data into acceptable statistic and plotting format, I then took the 
 
 ## Hypothesis Testing
 
-* H0 = Probability of no significant correlation between WallStreetBets Posts and GameStop stock value
-* HA = Probility of statistically significant correlation between WallStreetBets Posts and GameStop stock Value
-
-* Null Hypothesis: No correlation between number of stock mentions and GameStop stock price per day
-* Alternate Hypothesis: Statistically significant correlation between stock mentions and GameStop stock price per day
+* **Null Hypothesis**: Probability of no correlation between number of stock mentions and GameStop stock price per day
+* **Alternate Hypothesis**: Probability of statistically significant correlation between stock mentions and GameStop stock price per day
 
 ## Plots
 * Note: Plots in readme are updated automatically when file is run and pushed to repo. This is to allow for updates to WallStreet
