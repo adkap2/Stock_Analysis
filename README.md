@@ -16,7 +16,7 @@ To get this data into acceptable statistic and plotting format, I then took the 
 
 ## Running the code
 1.  **Initialization** 
-   - Call python3 "src/main.py" to run the code from the repository. If running in webscraping mode, add a 0 or 1 to the program call ex: "python3 src/main.py 1". 
+   - Call "python3 src/main.py" to run the code from the repository. If running in webscraping mode, add a 0 or 1 to the program call ex: "python3 src/main.py 1".
    - To scrape data, user must provide reddit developer key and userid, password in config.py file
    - To scrape for comments, use argument '0'
    - To scrape for mentions in posts, use argument '1'
@@ -88,15 +88,26 @@ identical pattern to that of GME.
 ## Results
 
 ###  Running The One Way Anova Test with gradient of daily number of stock mentions, daily change in stock price
-1.  **GME**
-    *  f value = 1.305
-    *  pvalue = 0.257
-2.  **AMC**
-    *  f value = 1.816
-    *  pvalue = 0.181
+To run the Anova test we must assume:
+  - The responses for each factor level have a normal population distribution
+  - These distributions have the same variance
+  - The data are independent
 
-The resulting p values from the Anova test suggest that there is not a significant enough correlation between stock
-price and GME or AMC stock to reject the Null Hypothesis.
+Since there is a large enough number of comments, based on the the previous plots, it appears that comments are somewhat normally
+distributed since there is a clear high point with lower levels to the left and right of it.
+Although I am taking the gradient in comment and stock day change, this will be more independent than the sole values
+for each day, however it is not quite independent as they are still time series plots.
+Equal variance is shown when the two datasets are normalized and plotted against each other.
+
+1.  **GME**
+    *  f value = 7.433
+    *  pvalue = 0.007491107552143138
+2.  **AMC**
+    *  f value = 6.156
+    *  pvalue = 0.014
+
+The resulting p values from the Anova test suggest that there is enough statistical signficance to reject the Null Hypothesis that GME price
+and mentions on WallStreetBets are correlated. This is assuming an alpha threshold of 0.05.
 
 ###  Running the One Sample Ttest with combined gradient values from daily number of stock mentions, daily change in stock price
 1.  **GME**
@@ -107,7 +118,9 @@ price and GME or AMC stock to reject the Null Hypothesis.
     *  pvalue = 0.0024
 
 The resulting p values from the One Sample Ttest suggest that there is enough statistical signficance to reject the Null Hypothesis that GME price
-and mentions on WallStreetBets are correlated.
+and mentions on WallStreetBets are correlated. This is assuming an alpha threshold of 0.05.
+
+## Moving Forward
 
 
 ## Technologies Used
@@ -124,4 +137,4 @@ and mentions on WallStreetBets are correlated.
 1.  Hutto, C.J. & Gilbert, E.E. (2014). VADER: A Parsimonious Rule-based Model for Sentiment Analysis of Social Media Text. Eighth International Conference on Weblogs and Social Media (ICWSM-14). Ann Arbor, MI, June 2014
 2.  “Yahoo Finance - Stock Market Live, Quotes, Business &amp; Finance News.” Yahoo! Finance, Yahoo!, finance.yahoo.com/.
 3.  “Subreddit Stats.” Subreddit Stats - Statistics for Every Subreddit, subredditstats.com/r/wallstreetbets.
-4.  “Hackingthemarkets - Overview.” GitHub, github.com/hackingthemarkets. 
+4.  “Hackingthemarkets - Overview.” GitHub, github.com/hackingthemarkets.
