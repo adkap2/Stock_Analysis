@@ -46,7 +46,7 @@ def plot_correlation_norm(symbol, df):
     plt.xlabel('Normalized Stock Day Change')
     plt.title(f"Mentions Vs daily stock price change for {symbol} normalized\n")
     plt.show(block=False)
-    plt.pause(10)
+    plt.pause(2)
     plt.close()
     figname = f"figures/{symbol}_Mentions_vs_Day_Change_Norm"
     fig.savefig(figname)

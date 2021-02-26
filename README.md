@@ -15,7 +15,7 @@ I ultimately decided to scrape subreddit posts using the [PushShiftAPI](https://
 To get this data into acceptable statistic and plotting format, I then took the daily change of mentions and stock price. Finally I normalized both values to be plotted together.
 
 ## Running the code
-1.  Initialization 
+1.  **Initialization** 
    - Call python3 "src/main.py" to run the code from the repository. If running in webscraping mode, add a 0 or 1 to the program call ex: "python3 src/main.py 1". 
    - To scrape data, user must provide reddit developer key and userid, password in config.py file
    - To scrape for comments, use argument '0'
@@ -26,10 +26,11 @@ To get this data into acceptable statistic and plotting format, I then took the 
    - For comment scraping mode, ensure [this](https://hub.docker.com/_/mongo) container is running on your computer
    - Once the database is running, call main in '0' mode to initiate pymongo with database
 
-2.  User mode
+2.  **User mode**
    - The program will request user to input a stock to analyze in symbol form
    - The program will plot insights on stock
    - The program will request user to either input another stock symbol or type 'q' to quit
+   - After 'q' is typed, program will output resulting statistic and p values for tests done, then accept or reject Null Hypothesis for each stock
 
 ## Hypothesis Testing
 
@@ -52,6 +53,8 @@ HA2 = Probility that Gamestop stock value played a statistically significant rol
 
 
 ## Plots
+* Note: Plots in readme are updated automatically when file is run and pushed to repo. This is to allow for updates to WallStreet
+Bets and Stock Price.
 
 ### GME
 <img src="figures/GME_Mentions_Price.png" alt="alt text" width=400 height=300>
