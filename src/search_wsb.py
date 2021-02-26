@@ -5,8 +5,8 @@ import psycopg2
 import psycopg2.extras
 
 ####################  IMPORTANT #####################################
-"""Although the other webscraping file was my own personal work, I cannot take creddit for this file as it was created
-by youtube PartTimeLarry in his webscraping stock instructional video series."""
+"""Although the other webscraping file was my own personal work, I cannot take credit for this file as it was created
+by youtuber PartTimeLarry in his webscraping stock instructional video series."""
 #########################################################################
 
 def main():

@@ -37,20 +37,8 @@ To get this data into acceptable statistic and plotting format, I then took the 
 H01 = Probability of no significant correlation between WallStreetBets Posts and GameStop stock value
 HA1 = Probility of statistically significant correlation between WallStreetBets Posts and GameStop stock Value
 
-H02 = Probability of no significant correlation between GameStop stock value and WallStreetBets subscriber count
-HA2 = Probility that Gamestop stock value played a statistically significant roll in increasing WallStreetBets' subscriber count
-
-
-## Statistical Tests
-
-1.  
-    * Null Hypothesis: No correlation between number of stock mentions and GameStop stock price per day
-    * Alternate Hypothesis: Statistically significant correlation between stock mentions and GameStop stock price per day
-
-2.  
-    * Null Hypothesis: No significant correlation between GameStop stock value and WallStreetBets subscriber count
-    * Alternative Hypothesis: Gamestop stock value influenced WallStreetBets subscriber count
-
+* Null Hypothesis: No correlation between number of stock mentions and GameStop stock price per day
+* Alternate Hypothesis: Statistically significant correlation between stock mentions and GameStop stock price per day
 
 ## Plots
 * Note: Plots in readme are updated automatically when file is run and pushed to repo. This is to allow for updates to WallStreet
