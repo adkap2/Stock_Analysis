@@ -87,6 +87,8 @@ distributed since there is a clear high point with lower levels to the left and 
 Although I am taking the gradient in comment and stock day change, this will be more independent than the sole values
 for each day, however it is not quite independent as they are still time series plots.
 Equal variance is shown when the two datasets are normalized and plotted against each other.
+I am using an alpha value of 0.05 as it is the general standard. The statistics on this data are not critical enough to justify a lower
+Alpha threshold.
 
 1.  **GME**
     *  f value = 7.433
