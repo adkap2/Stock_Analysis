@@ -78,13 +78,19 @@ def main(argv = None):
         dfs = plot_stocks.main()
         one_samples = {}
         for df in dfs:
-            print(dfs[df])
-            print("\n")
             print((df, one_way_anova(dfs[df])), file=open('data/stats_output.txt', "a"))
-            print("\n")
+            print(f"The One Way Anova test for {df} yielded a statistic\
+value of {one_way_anova(dfs[df])[0]} and a pvalue of {one_way_anova(dfs[df])[1]}")
             one_samples[df] = one_sample_ttest(dfs[df])
-            plot_correlation_norm(df, dfs[df])
-            print("\n")
+            print(f"The one sample ttest for {df} yielded a statistic\
+value of {one_samples[df][0]} and a pvalue of {one_samples[df][1]}")
+            if one_samples[df][1] < 0.05 and one_way_anova(dfs[df])[1] < 0.05:
+                print(f"Since both tests yielded a pvalue below our 0.05 threshold, we can confidently reject\
+ our null hypothesis that there is no statistically significant correlation between \
+{df} mentions and {df} stock price")
+            else:
+                print(f"The p value is above our necessary 0.05 threshold to reject our null hyptothesis\
+ that the stock price of {df} has no correlation with number of {df} mentions.")
         for sample in one_samples:
             print((sample, one_samples[sample]), file=open('data/stats_output.txt', "a"))
 

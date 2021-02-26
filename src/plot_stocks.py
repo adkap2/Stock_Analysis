@@ -91,6 +91,7 @@ def main():
     returns the dataframe to overall program main file
     """
     symbol = input("What Stock would you like to see (Symbol): ")
+    one_samples = {}
     dataframes = {}
     while symbol != 'q':
         connection = psycopg2.connect(host=config.DB_HOST, database=config.DB_NAME, user=config.DB_USER, password=config.DB_PASS)
@@ -106,10 +107,10 @@ def main():
             plot_changes(symbol, result)
             plot_high_low_changes(symbol, result)
             plot_full_values(symbol, result)
+            plot_correlation_norm(symbol, result)
             dataframes[symbol] = result
         symbol = input("Grab another stock? Or press q to quit: ")
     return dataframes
-
 
 def make_sql_queries():
     """ make_sql_queries() -> dic (Dictionary)

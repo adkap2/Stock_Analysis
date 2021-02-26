@@ -21,7 +21,8 @@ def one_sample_ttest(df):
     and if one of them is positive and the other one negative add 0.
     the mean (Mu) provided is equal to 0.5.
     """
-    return stats.ttest_1samp(df['Anova_Vals'], 0.5)
+    statistic, prob = stats.ttest_1samp(df['Anova_Vals'], 0.5)
+    return statistic, prob
 
 def probability_of_res_plot(model):
     """ probability_of_res_plot(model) -> None
