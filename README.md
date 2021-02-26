@@ -35,8 +35,8 @@ To get this data into acceptable statistic and plotting format, I then took the 
 
 ## Hypothesis Testing
 
-H01 = Probability of no significant correlation between WallStreetBets Posts and GameStop stock value
-HA1 = Probility of statistically significant correlation between WallStreetBets Posts and GameStop stock Value
+* H0 = Probability of no significant correlation between WallStreetBets Posts and GameStop stock value
+* HA = Probility of statistically significant correlation between WallStreetBets Posts and GameStop stock Value
 
 * Null Hypothesis: No correlation between number of stock mentions and GameStop stock price per day
 * Alternate Hypothesis: Statistically significant correlation between stock mentions and GameStop stock price per day
