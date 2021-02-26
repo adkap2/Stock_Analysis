@@ -97,7 +97,7 @@ Alpha threshold.
     *  f value = 6.156
     *  pvalue = 0.014
 
-The resulting p values from the Anova test suggest that there is enough statistical signficance to reject the Null Hypothesis that GME price
+The resulting p values from the [Anova test](https://www.statisticshowto.com/probability-and-statistics/hypothesis-testing/anova/) suggest that there is enough statistical signficance to reject the Null Hypothesis that GME price
 and mentions on WallStreetBets are correlated. This is assuming an alpha threshold of 0.05.
 
 ###  Running the One Sample Ttest with combined gradient values from daily number of stock mentions, daily change in stock price

@@ -37,6 +37,7 @@ def load_env_vars():
     """Loads environment variables from .env file
     returns them as key value dictionary"""
     env = {}
+    # Keeps env variables local
     load_dotenv()
     env['client_id'] = os.getenv('client_id')
     env['client_secret'] = os.getenv("client_secret")
