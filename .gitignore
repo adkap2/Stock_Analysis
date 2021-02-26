@@ -4,3 +4,4 @@ config.py
 requirements.txt
 reddit_refresh.py
 stocks.csv
+.ipynb_checkpoints
