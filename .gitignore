@@ -5,3 +5,4 @@ requirements.txt
 reddit_refresh.py
 stocks.csv
 .ipynb_checkpoints
+__pycache__
