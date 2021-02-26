@@ -122,6 +122,10 @@ and mentions on WallStreetBets are correlated. This is assuming an alpha thresho
 
 ## Moving Forward
 
+As of making this project, GME has once again been making market and WallStreetBets news by skyrocketting. Due to the continous nature
+of this data set, I plan to write a bash script that will scrape nightly to add to the database.
+Additionally, I plan to turn this program into a fullstack web app using Flask. The app will provide statistics and graphs based on
+user stock input.
 
 ## Technologies Used
 * MongoDB
