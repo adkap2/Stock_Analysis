@@ -78,11 +78,3 @@ def make_sentiment_vals(db):
         writer.writerow(["GME", "PLTR"])
         for i in range(len(instances)):
             writer.writerow([instances[i][0], instances[i][1]])
-
-# def get_post_names():
-#     daily_disc = list()
-#     string = "What Are Your Moves Tomorrow, January "
-#     for i in range(1,31):
-#         string1 = string + str(i) + ", 2021"
-#         daily_disc.append(string1)
-#     return daily_disc

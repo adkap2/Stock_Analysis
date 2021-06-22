@@ -56,7 +56,7 @@ def access_comments():
     comment."""
     env = load_env_vars()
     sub, stock = get_input_data()
-    start = datetime.datetime(2020, 12, 16)
+    start = datetime.datetime(2021, 2, 21)
     end = datetime.date.today()
     stock = plot_stocks.get_stock(stock, start, end)
     stock = plot_stocks.clean_data(stock)
